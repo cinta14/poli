@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         text: "No KTP telah terdaftar sebelumnya",
                         confirmButtonText: "OK",
                         didClose: () => {
-                            window.location.href = "registerPasien.php";
+                            window.location.href = "register.php";
                         }
                     });
                 });
