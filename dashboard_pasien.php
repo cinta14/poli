@@ -1,8 +1,8 @@
 <?php
 session_start();
-$username = $_SESSION['username'];
+$nama = $_SESSION['nama'];
 
-if ($username == "") {
+if ($nama == "") {
     header("location:login.php");
 }
 ?>

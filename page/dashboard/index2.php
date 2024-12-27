@@ -4,15 +4,15 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 require 'koneksi.php'; // Database connection file
 
-// Set default username and id_poli for testing (Remove this in production)
-if (!isset($_SESSION['username'])) {
-    $_SESSION['username'] = 'Cinta'; // Example username
+// Set default nama and id_poli for testing (Remove this in production)
+if (!isset($_SESSION['nama'])) {
+    $_SESSION['nama'] = 'Cinta'; // Example nama
 }
 if (!isset($_SESSION['id_poli'])) {
     $_SESSION['id_poli'] = 1; // Example id_poli
 }
 
-$username = $_SESSION['username'];
+$nama = $_SESSION['nama'];
 $id_poli = $_SESSION['id_poli'];
 
 if ($id_poli) {

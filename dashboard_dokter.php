@@ -1,6 +1,6 @@
 <?php
 session_start();
-$username = $_SESSION['username'];
+$nama = $_SESSION['nama'];
 
 // Check if 'id_poli' is set in session, if not set a default value or redirect
 if (isset($_SESSION['id_poli'])) {
@@ -11,8 +11,8 @@ if (isset($_SESSION['id_poli'])) {
     $id_poli = null; // or header("location: login.php"); if you need to handle it differently
 }
 
-// Ensure that username is set
-if ($username == "") {
+// Ensure that nama is set
+if ($nama == "") {
     header("location:login.php");
 }
 ?>

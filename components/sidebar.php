@@ -10,14 +10,14 @@
         }
 
         // Validasi session dan role pengguna
-        if (!isset($_SESSION['akses']) || !isset($_SESSION['username'])) {
+        if (!isset($_SESSION['akses']) || !isset($_SESSION['nama'])) {
             // Redirect ke halaman login jika session tidak ada
             header('Location: login.php');
             exit();
         }
 
         $role = $_SESSION['akses'];
-        $username = $_SESSION['username'];
+        $nama = $_SESSION['nama'];
         ?>
 
         <!-- Sidebar user panel (optional) -->
@@ -26,11 +26,11 @@
                 <img src="app/images/profil.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block text-light"><?php echo htmlspecialchars($username); ?></a>
+                <a href="#" class="d-block text-light"><?php echo htmlspecialchars($nama); ?></a>
             </div>
         </div>
         <hr class="bg-light">
-        Sidebar Menu
+        
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Menu berdasarkan role pengguna -->
@@ -100,6 +100,13 @@
                                     <a href="riwayatPasien.php" class="nav-link">
                                         <i class="fas fa-notes-medical nav-icon text-light"></i>
                                         <p class="text-light">Riwayat Pasien <span
+                                                class="right badge badge-danger">Dokter</span></p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="profilDokter.php" class="nav-link">
+                                        <i class="fas fa-notes-medical nav-icon text-light"></i>
+                                        <p class="text-light">Profil<span
                                                 class="right badge badge-danger">Dokter</span></p>
                                     </a>
                                 </li>

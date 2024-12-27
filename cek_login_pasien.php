@@ -3,11 +3,11 @@ session_start();
 require 'koneksi.php';
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $username = $_POST['username'];
+    $nama = $_POST['nama'];
     $password = md5($_POST['password']);
 
-    // Cek apakah username dan password cocok di database
-    $query = "SELECT * FROM pasien WHERE nama = '$username' && password = '$password'";
+    // Cek apakah nama dan password cocok di database
+    $query = "SELECT * FROM pasien WHERE nama = '$nama' && password = '$password'";
     $result = mysqli_query($mysqli, $query);
 
     if (mysqli_num_rows($result) > 0) {
@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         // Jika login berhasil, simpan data ke sesi
         $_SESSION['id'] = $data['id'];
-        $_SESSION['username'] = $data['nama'];
+        $_SESSION['nama'] = $data['nama'];
         $_SESSION['password'] = $data['password'];
         $_SESSION['no_rm'] = $data['no_rm'];
         $_SESSION['akses'] = "pasien";
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     Swal.fire({
                         icon: "error",
                         title: "Login Gagal",
-                        text: "Username atau password salah!",
+                        text: "nama atau password salah!",
                         confirmButtonText: "OK"
                     }).then((result) => {
                         if (result.isConfirmed) {

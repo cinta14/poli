@@ -1,21 +1,23 @@
-<?php
-session_start();
-$nama = $_SESSION['nama'];
-
-if ($nama == "") {
-    header("location:login.php");
-}
-// else if ($_SESSION['akses'] != "admin") {
-//     echo '<script>alert("Anda tidak memiliki akses");window.location.href="login.php";</script>';
-// }
-?>
 <!DOCTYPE html>
+<?php
+    session_start();
+    $nama = $_SESSION['nama'];
+    $idPasien = $_SESSION['id'];
+
+    if ($nama == "") {
+        header("location:loginUser.php");
+    }
+?>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Poliklinik</title>
+    <title>Udinus Poliklinik</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -24,32 +26,24 @@ if ($nama == "") {
     <link rel="stylesheet" href="app/plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="app/dist/css/adminlte.min.css">
-    <!-- SweetAlert2 -->
-    <link rel="stylesheet" href="app/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
 
         <!-- Navbar -->
-        <?php include('components/navbar.php') ?>
+        <?php include ('components/navbar.php') ?>
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <?php include('components/sidebar.php') ?>
+        <?php include ('components/sidebar.php') ?>
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
-            <?php include('page/pasien/index.php') ?>
+            <?php include ('page/daftarPoli/index.php') ?>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
 
         <!-- Main Footer -->
     </div>
@@ -63,8 +57,25 @@ if ($nama == "") {
     <script src="app/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="app/dist/js/adminlte.min.js"></script>
-    <!-- SweetAlert2 -->
-    <script src="apps/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('#poli').on('change', function() {
+            var poliId = $(this).val();
+
+            // Mengambil data jadwal berdasarkan poli yang dipilih
+            $.ajax({
+                type: 'POST',
+                url: 'getJadwal.php', // Ganti dengan path file get_jadwal.php sesuai dengan struktur proyek Anda
+                data: {
+                    poliId: poliId
+                },
+                success: function(data) {
+                    $('#jadwal').html(data);
+                }
+            });
+        });
+    });
+    </script>
 </body>
 
 </html>

@@ -7,19 +7,19 @@ include 'koneksi.php';
 $error = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $username = $_POST['username'];
+  $nama = $_POST['nama'];
   $password = $_POST['password'];
 
   // Menggunakan prepared statement
-  $stmt = $mysqli->prepare("SELECT * FROM pasien WHERE username = ?");
-  $stmt->bind_param("s", $username);
+  $stmt = $mysqli->prepare("SELECT * FROM pasien WHERE nama = ?");
+  $stmt->bind_param("s", $nama);
   $stmt->execute();
   $result = $stmt->get_result();
 
   if ($result && $result->num_rows > 0) {
     $row = $result->fetch_assoc();
     if (password_verify($password, $row['password'])) {
-      $_SESSION['username'] = $username;
+      $_SESSION['nama'] = $nama;
       $_SESSION['user_id'] = $row['id_user'];
       $_SESSION['akses'] = $row['role']; // Set role untuk digunakan di sidebar
 
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $error = "Password salah.";
     }
   } else {
-    $error = "Username tidak ditemukan.";
+    $error = "nama tidak ditemukan.";
   }
 }
 ?>
@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <p class="login-box-msg">Login to your account</p>
           <form action="cek_login_pasien.php" method="post">
             <div class="input-group mb-3">
-              <input type="text" class="form-control" placeholder="Username" name="username" />
+              <input type="text" class="form-control" placeholder="nama" name="nama" />
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-envelope"></span>

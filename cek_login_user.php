@@ -3,26 +3,26 @@ session_start();
 require 'koneksi.php';
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $username = $_POST['username'];
+    $nama = $_POST['nama'];
     $password = md5($_POST['password']);
 
     // Cek login untuk admin
-    if ($username == "admin" && $password == md5("admin")) {
-        $_SESSION['username'] = $username;
+    if ($nama == "admin" && $password == md5("admin")) {
+        $_SESSION['nama'] = $nama;
         $_SESSION['password'] = $password;
         $_SESSION['akses'] = "admin";
 
         header("location:dashboard_admin.php");
     } else {
         // Cek login untuk dokter
-        $query = "SELECT * FROM dokter WHERE nama = '$username' && password = '$password'";
+        $query = "SELECT * FROM dokter WHERE nama = '$nama' && password = '$password'";
         $result = mysqli_query($mysqli, $query);
 
         if (mysqli_num_rows($result) > 0) {
             $data = mysqli_fetch_assoc($result);
 
             $_SESSION['id'] = $data['id'];
-            $_SESSION['username'] = $data['nama'];
+            $_SESSION['nama'] = $data['nama'];
             $_SESSION['password'] = $data['password'];
             $_SESSION['id_poli'] = $data['id_poli'];
             $_SESSION['akses'] = "dokter";
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         Swal.fire({
                             icon: "error",
                             title: "Login Gagal",
-                            text: "Username atau password salah!",
+                            text: "nama atau password salah!",
                             confirmButtonText: "OK",
                             didClose: () => {
                                 window.location.href = "login_user.php";
